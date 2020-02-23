@@ -15,6 +15,9 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: Text('Profile'),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.highlight_off), onPressed: () {})
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(

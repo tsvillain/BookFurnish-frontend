@@ -120,7 +120,7 @@ class _LoginState extends State<Login> {
                         GestureDetector(
                             onTap: () {
                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
+                                  CupertinoPageRoute(builder: (context) {
                                 return Signup();
                               }));
                             },

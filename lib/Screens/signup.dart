@@ -45,50 +45,50 @@ class _SignupState extends State<Signup> {
                     SizedBox(
                       height: 30,
                     ),
-                    Container(
-                      height: 70,
-                      child: Card(
-                        elevation: 100.0,
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Center(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.all(15.0),
-                              hintText: 'First Name',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 70,
-                      child: Card(
-                        elevation: 100.0,
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Center(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.all(15.0),
-                              hintText: 'Last Name',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    // Container(
+                    //   height: 70,
+                    //   child: Card(
+                    //     elevation: 100.0,
+                    //     clipBehavior: Clip.antiAlias,
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10.0),
+                    //     ),
+                    //     child: Center(
+                    //       child: TextFormField(
+                    //         decoration: InputDecoration(
+                    //           border: InputBorder.none,
+                    //           contentPadding: EdgeInsets.all(15.0),
+                    //           hintText: 'First Name',
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
+                    // Container(
+                    //   height: 70,
+                    //   child: Card(
+                    //     elevation: 100.0,
+                    //     clipBehavior: Clip.antiAlias,
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10.0),
+                    //     ),
+                    //     child: Center(
+                    //       child: TextFormField(
+                    //         decoration: InputDecoration(
+                    //           border: InputBorder.none,
+                    //           contentPadding: EdgeInsets.all(15.0),
+                    //           hintText: 'Last Name',
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
                     Container(
                       height: 70,
                       child: Card(
@@ -111,29 +111,29 @@ class _SignupState extends State<Signup> {
                     SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      height: 70,
-                      child: Card(
-                        elevation: 100.0,
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Center(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.all(15.0),
-                              hintText: 'Password',
-                            ),
-                            obscureText: true,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    // Container(
+                    //   height: 70,
+                    //   child: Card(
+                    //     elevation: 100.0,
+                    //     clipBehavior: Clip.antiAlias,
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10.0),
+                    //     ),
+                    //     child: Center(
+                    //       child: TextFormField(
+                    //         decoration: InputDecoration(
+                    //           border: InputBorder.none,
+                    //           contentPadding: EdgeInsets.all(15.0),
+                    //           hintText: 'Password',
+                    //         ),
+                    //         obscureText: true,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
                     ButtonTheme(
                       minWidth: width,
                       height: 50,
