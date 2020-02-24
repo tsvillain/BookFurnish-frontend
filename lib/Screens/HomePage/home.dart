@@ -1,3 +1,4 @@
+import 'package:BookFurnish/Screens/Donate.dart';
 import 'package:BookFurnish/Screens/HomePage/DefaultPage.dart';
 import 'package:BookFurnish/Screens/HomePage/issuedBook.dart';
 import 'package:BookFurnish/Model/fixedFAb.dart';
@@ -77,9 +78,9 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => FavPage()));
+              .push(MaterialPageRoute(builder: (context) => DonateBook()));
         },
-        child: Icon(Icons.favorite),
+        child: Icon(Icons.add),
       ),
       floatingActionButtonLocation:
           FixedCenterDockedFabLocation(context: context),

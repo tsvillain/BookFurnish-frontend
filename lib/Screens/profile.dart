@@ -8,6 +8,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool editable = false;
   String btnText = 'Edit Profile';
+  int rating = 3;
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -27,14 +28,58 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 50, 0, 40),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            'https://randomuser.me/api/portraits/men/9.jpg'),
-                        radius: 100.0,
-                        //child: Image(image: AssetImage('asset/image/login_background.jpg')),
-                      ),
-                    ),
+                        padding: const EdgeInsets.fromLTRB(0, 50, 0, 40),
+                        child: Stack(
+                          children: <Widget>[
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  'https://randomuser.me/api/portraits/men/9.jpg'),
+                              radius: 100.0,
+                              //child: Image(image: AssetImage('asset/image/login_background.jpg')),
+                            ),
+                            Positioned(
+                              top: 0.0,
+                              left: 0.0,
+                              child: RaisedButton(
+                                color: rating > 3
+                                    ? Colors.green
+                                    : rating > 2 ? Colors.orange : Colors.red,
+                                onPressed: () {},
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100.0),
+                                ),
+                                child: Text(
+                                  rating.toString(),
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              // Container(
+                              //   decoration: BoxDecoration(
+                              //       shape: BoxShape.circle,
+                              //       borderRadius: BorderRadius.circular(50.0),
+                              //       color: rating > 3
+                              //           ? Colors.green
+                              //           : rating > 2
+                              //               ? Colors.orange
+                              //               : Colors.red),
+                              //   child: Text(
+                              //     rating.toString(),
+                              //     style: TextStyle(color: Colors.white),
+                              //   ),
+                              //)
+                              // IconButton(
+                              //   icon: Icon(Icons.near_me),
+                              //   // Text(
+                              //   //   '5',
+                              //   //   style: TextStyle(color: Colors.white),
+                              //   // ),
+                              //   onPressed: () {},
+                              //   color: rating > 3 ? Colors.green : Colors.red,
+                              // ),
+                            )
+                          ],
+                          overflow: Overflow.clip,
+                        )),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                       child: Column(
