@@ -1,5 +1,6 @@
 import 'package:BookFurnish/Screens/HomePage/DefaultPage.dart';
 import 'package:BookFurnish/Screens/HomePage/issuedBook.dart';
+import 'package:BookFurnish/Model/fixedFAb.dart';
 import 'package:BookFurnish/Screens/favPage.dart';
 import 'package:BookFurnish/Screens/profile.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,9 +66,9 @@ class _HomeState extends State<Home> {
         child: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home), title: Text("Home")),
+                icon: Icon(Icons.done), title: Text("Donated")),
             BottomNavigationBarItem(
-                icon: Icon(Icons.book), title: Text("Issued Book"))
+                icon: Icon(Icons.book), title: Text("Recived"))
           ],
           currentIndex: _selectedIndex,
           onTap: _onTap,
@@ -80,7 +81,8 @@ class _HomeState extends State<Home> {
         },
         child: Icon(Icons.favorite),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation:
+          FixedCenterDockedFabLocation(context: context),
     );
   }
 
