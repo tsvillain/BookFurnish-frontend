@@ -1,9 +1,12 @@
+import 'package:BookFurnish/Database/databaseDAO.dart';
+import 'package:BookFurnish/Database/userData.dart';
+import 'package:BookFurnish/Screens/HomePage/home.dart';
 import 'package:BookFurnish/Screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -13,51 +16,55 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BookShare',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      // ),
-      darkTheme: ThemeData.dark(),
-      home: Login(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      // darkTheme: ThemeData.dark(),
+      home: MyHomePage(),
       //MyHomePage(title: 'Book Sharing'),
     );
   }
 }
 
-// class MyHomePage extends StatefulWidget {
-//   MyHomePage({Key key, this.title}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
-//   final String title;
+class _MyHomePageState extends State<MyHomePage> {
+  bool isLoading = true;
+  DatabaseDAO databaseDAO = DatabaseDAO();
+  List<UserData> userData;
+  checkLogin() async {
+    List _userData = await databaseDAO.getAllSortedByID();
+    setState(() {
+      userData = _userData;
+      isLoading = false;
+    });
+    if (userData.length == 1) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Home(),
+          ));
+    } else {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Login(),
+          ));
+    }
+  }
 
-//   @override
-//   _MyHomePageState createState() => _MyHomePageState();
-// }
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    checkLogin();
+  }
 
-// class _MyHomePageState extends State<MyHomePage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.title),
-//         centerTitle: true,
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             Text(
-//               'Book Sharing App',
-//             ),
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         child: Icon(Icons.add),
-//         onPressed: () {
-//           Navigator.push(context, MaterialPageRoute(builder: (context) {
-//             return Login();
-//           }));
-//         },
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}

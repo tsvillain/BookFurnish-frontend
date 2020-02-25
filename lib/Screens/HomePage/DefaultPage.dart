@@ -70,12 +70,12 @@ class _DefaultPageState extends State<DefaultPage>
                             image: NetworkImage(
                                 'https://randomuser.me/api/portraits/men/9.jpg'),
                             fit: BoxFit.fill,
-                            height: 200,
+                            height: 220,
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: RichText(
-                              textAlign: TextAlign.justify,
+                              textAlign: TextAlign.left,
                               text: TextSpan(
                                   text: book[index]['bookName'],
                                   style: TextStyle(
