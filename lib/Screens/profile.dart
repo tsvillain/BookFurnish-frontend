@@ -15,7 +15,6 @@ class _ProfilePageState extends State<ProfilePage> {
   List<UserData> userData;
   bool editable = false;
   String btnText = 'Edit Profile';
-  int rating = 3;
   getProfile() async {
     List _userData = await databaseDAO.getAllSortedByID();
     setState(() {
@@ -70,9 +69,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     bottom: 0.0,
                                     right: 0.0,
                                     child: RaisedButton(
-                                      color: rating > 3
+                                      color: userData[0].needScore > 3
                                           ? Colors.green
-                                          : rating > 2
+                                          : userData[0].needScore > 2
                                               ? Colors.orange
                                               : Colors.red,
                                       onPressed: () {},
@@ -81,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             BorderRadius.circular(100.0),
                                       ),
                                       child: Text(
-                                        rating.toString(),
+                                        userData[0].needScore.toString(),
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ),

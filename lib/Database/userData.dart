@@ -2,6 +2,8 @@ import 'package:meta/meta.dart';
 
 class UserData {
   int id;
+  final int needScore;
+  final String mongoID;
   final String name;
   final String branch;
   final String semester;
@@ -12,6 +14,8 @@ class UserData {
   final String token;
 
   UserData({
+    @required this.needScore,
+    @required this.mongoID,
     @required this.name,
     @required this.branch,
     @required this.semester,
@@ -24,6 +28,8 @@ class UserData {
 
   Map<String, dynamic> toMap() {
     return {
+      'needScore': needScore,
+      'mongoID': mongoID,
       'name': name,
       'branch': branch,
       'semester': semester,
@@ -37,6 +43,8 @@ class UserData {
 
   static UserData fromMap(Map<String, dynamic> map) {
     return UserData(
+      needScore: map['needScore'],
+      mongoID: map['mongoID'],
       name: map['name'],
       branch: map['branch'],
       semester: map['semester'],

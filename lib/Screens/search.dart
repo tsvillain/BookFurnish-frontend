@@ -1,25 +1,26 @@
-import 'dart:convert';
-import 'dart:ui';
-import 'package:basic_utils/basic_utils.dart';
-import 'package:http/http.dart' as http;
 import 'package:BookFurnish/Screens/bookDetails.dart';
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'dart:convert';
+
 import 'package:transparent_image/transparent_image.dart';
 
-class DefaultPage extends StatefulWidget {
+class Search extends StatefulWidget {
   @override
-  _DefaultPageState createState() => _DefaultPageState();
+  _SearchState createState() => _SearchState();
 }
 
-class _DefaultPageState extends State<DefaultPage>
-    with AutomaticKeepAliveClientMixin {
-  bool isLoading = true;
+class _SearchState extends State<Search> {
   List book;
-  final url = "https://fast-everglades-73327.herokuapp.com/api/v1/book";
-  getBooks() async {
-    var res = await http
-        .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
-    Map<String, dynamic> map = json.decode(res.body);
+  bool isLoading = true;
+  final String urlSearch =
+      "https://fast-everglades-73327.herokuapp.com/api/v1/book/search";
+  getData() async {
+    Map<String, String> header = {"Content-type": "application/json"};
+    String json = '{"search": "' + finalSearch + '"}';
+    Response res = await post(urlSearch, headers: header, body: json);
+    Map<String, dynamic> map = jsonDecode(res.body);
     List<dynamic> data = map["data"]["book"];
     setState(() {
       book = data;
@@ -27,40 +28,57 @@ class _DefaultPageState extends State<DefaultPage>
       print(book.length);
       print(book);
     });
-
-    // var res = await http
-    //     .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
-    // Map<String, dynamic> map = json.decode(res.body);
-    // List<dynamic> data = map["data"]["book"];
-    // setState(() {
-    //   book = data;
-    //   isLoading = false;
-    //   print(book.length);
-    //   print(book);
-    // });
-    // final String urlSearch =
-    //     "https://fast-everglades-73327.herokuapp.com/api/v1/book/search";
-    // Map<String, String> header = {"Content-type": "application/json"};
-    // String json = '{"search": "' + widget.search + '"}';
-    // Response response = await post(urlSearch, headers: header, body: json);
-    // Map<String, dynamic> map = json.decode(response.body);
-    // List<dynamic> data = map["data"]["book"];
-    // setState(() {
-    //   book = data;
-    //   isLoading = false;
-    //   print(book.length);
-    //   print(book);
-    // });
   }
 
-  initState() {
-    super.initState();
-    getBooks();
-  }
-
+  TextEditingController searchController = TextEditingController();
+  String finalSearch;
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    return Scaffold(
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              getData();
+            },
+          )
+        ],
+        title: TextFormField(
+          controller: searchController,
+          style: TextStyle(color: Colors.white),
+          autofocus: true,
+          onEditingComplete: () {
+            setState(() {
+              finalSearch = searchController.text;
+            });
+          },
+          decoration: InputDecoration(
+              hintText: "Search...", hintStyle: TextStyle(color: Colors.white)),
+        ),
+      ),
+      body: SearchScreen(
+        books: book,
+      ),
+    );
+  }
+}
+
+class SearchScreen extends StatefulWidget {
+  final List books;
+  SearchScreen({this.books});
+  @override
+  _SearchScreenState createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  List book;
+  bool isLoading = true;
+  @override
+  Widget build(BuildContext context) {
+    setState(() {
+      book = widget.books;
+    });
     var size = MediaQuery.of(context).size;
     //final double itemHeight = (size.height - kToolbarHeight) / 2;
     final double itemWidth = (size.width / 2);
@@ -127,7 +145,4 @@ class _DefaultPageState extends State<DefaultPage>
                 }),
           );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

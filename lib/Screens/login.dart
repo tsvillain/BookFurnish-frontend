@@ -42,6 +42,8 @@ class _LoginState extends State<Login> {
       // prefs.setString('password', pass);
       // prefs.setString('token', data['data']['token']);
       databaseDAO.insert(UserData(
+        needScore: data['data']['needScore'],
+        mongoID: data['data']['mongoID'],
         name: data['data']['name'],
         branch: data['data']['branch'],
         semester: data['data']['semester'],
@@ -60,9 +62,15 @@ class _LoginState extends State<Login> {
     } else {
       isLoading = false;
       _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Wrong username or password'),
+        content: Text('Invalid username or password'),
         duration: Duration(seconds: 2),
       ));
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        Navigator.pushReplacement(
+            context, CupertinoPageRoute(builder: (context) => Login()));
+      });
+      // Navigator.pushReplacement(
+      //     context, CupertinoPageRoute(builder: (context) => Login()));
     }
   }
 
@@ -180,27 +188,27 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text("Don't have an account? "),
-                              GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        CupertinoPageRoute(builder: (context) {
-                                      return Signup();
-                                    }));
-                                  },
-                                  child: Text(
-                                    "Sign Up",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ))
-                            ],
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: <Widget>[
+                          //     Text("Don't have an account? "),
+                          //     GestureDetector(
+                          //         onTap: () {
+                          //           Navigator.push(context,
+                          //               CupertinoPageRoute(builder: (context) {
+                          //             return Signup();
+                          //           }));
+                          //         },
+                          //         child: Text(
+                          //           "Sign Up",
+                          //           style:
+                          //               TextStyle(fontWeight: FontWeight.bold),
+                          //         ))
+                          //   ],
+                          // ),
+                          // SizedBox(
+                          //   height: 15,
+                          // ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
