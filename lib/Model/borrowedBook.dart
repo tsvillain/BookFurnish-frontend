@@ -37,8 +37,8 @@ class UserInfo {
   final String email;
   final String branch;
   final String semester;
-  final String enrollmentNo;
-  final String income;
+  final int enrollmentNo;
+  final int income;
 
   UserInfo(
       {this.userType,
@@ -69,7 +69,7 @@ class BookData {
   final String bookName;
   final String author;
   final String bookType;
-  final String doner;
+  final int doner;
   final String bookImage;
 
   BookData({

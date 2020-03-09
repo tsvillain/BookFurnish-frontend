@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:BookFurnish/Database/databaseDAO.dart';
 import 'package:BookFurnish/Database/userData.dart';
+import 'package:BookFurnish/Model/borrowedBook.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-//TODO:
 
 class IssuedBook extends StatefulWidget {
   @override
@@ -12,10 +12,11 @@ class IssuedBook extends StatefulWidget {
 
 class _IssuedBookState extends State<IssuedBook> {
   bool isLoading = true;
-  List book;
+  Product book;
   DatabaseDAO databaseDAO = DatabaseDAO();
   String mID;
   List<UserData> userData;
+
   getProfile() async {
     List _userData = await databaseDAO.getAllSortedByID();
     setState(() {
@@ -32,19 +33,15 @@ class _IssuedBookState extends State<IssuedBook> {
   }
 
   getBooks() async {
-    print('inside');
     String url =
         "https://fast-everglades-73327.herokuapp.com/api/v1/borrow/" + mID;
     var res = await http
         .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
     Map<String, dynamic> map = json.decode(res.body);
-    List<dynamic> data = map["data"]["result"];
-    //var data = map["data"]["result"];
-    print(data);
+    var borrowedBook = Product.fromJson(map);
     setState(() {
-      book = data;
+      book = borrowedBook;
       isLoading = false;
-      print(book);
     });
   }
 
@@ -53,10 +50,8 @@ class _IssuedBookState extends State<IssuedBook> {
     return isLoading
         ? Center(child: CircularProgressIndicator())
         : ListView.builder(
-            itemCount: book.length,
+            itemCount: book.results.length,
             itemBuilder: (context, index) {
-              var newData = book[index]['bookData'];
-              print(newData);
               return Card(
                 margin: EdgeInsets.all(10),
                 clipBehavior: Clip.antiAlias,
@@ -65,11 +60,12 @@ class _IssuedBookState extends State<IssuedBook> {
                 ),
                 child: ListTile(
                   leading: Image(
-                    image: NetworkImage(newData[index]['bookImage']),
+                    image: NetworkImage(
+                        book.results[index].bookDatas[0].bookImage),
                     fit: BoxFit.fill,
                   ),
-                  title: Text(newData['bookName']),
-                  subtitle: Text('Author: ' + newData[index]['author']),
+                  title: Text(book.results[index].bookDatas[0].bookName),
+                  subtitle: Text(book.results[index].bookDatas[0].author),
                 ),
               );
             });
